@@ -1,0 +1,9 @@
+{
+  "name": "ai-resume-analyzer",
+  "version": "1.0.0",
+  "scripts": {
+    "server": "node Server/app.js",
+    "client": "npm run dev --prefix Client/client",
+    "dev": "npm run server & npm run client"
+  }
+}
