@@ -49,3 +49,4 @@ VITE_API_URL=http://localhost:5000/api
 | "Registration failed" | Backend is not running or MONGO_URI is wrong |
 | E11000 duplicate key username | Fixed automatically on server start |
 # Major_projects
+# Analyzer
