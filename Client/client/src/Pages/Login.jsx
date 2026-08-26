@@ -16,13 +16,17 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!form.email.trim() || !form.password) {
+      toast.error("Email and password are required");
+      return;
+    }
     setLoading(true);
     try {
       await login(form.email, form.password);
       toast.success("Login successful!");
       navigate("/dashboard");
     } catch (err) {
-      toast.error(err?.message || err?.response?.data?.message || "Login failed");
+      toast.error(err?.response?.data?.message || err?.message || "Login failed");
     } finally {
       setLoading(false);
     }

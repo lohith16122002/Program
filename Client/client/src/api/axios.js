@@ -1,13 +1,18 @@
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const configuredApiUrl = import.meta.env.VITE_API_URL?.replace(/\/+$/, "");
+const API_URL = configuredApiUrl
+  ? configuredApiUrl.endsWith("/api")
+    ? configuredApiUrl
+    : `${configuredApiUrl}/api`
+  : "http://localhost:5000/api";
 
-if (!API_URL) {
+if (!configuredApiUrl) {
   console.error("[CONFIG ERROR] VITE_API_URL is not set in .env");
 }
 
 const api = axios.create({
-  baseURL: API_URL || "http://localhost:5000/api",
+  baseURL: API_URL,
   timeout: 30000, // 30s timeout — prevents infinite hangs
 });
 

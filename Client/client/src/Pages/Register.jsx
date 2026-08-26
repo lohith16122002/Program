@@ -16,6 +16,14 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!form.name.trim() || !form.email.trim() || !form.password) {
+      toast.error("Name, email and password are required");
+      return;
+    }
+    if (form.password.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
     if (form.password !== form.confirmPassword) {
       toast.error("Passwords do not match");
       return;
@@ -26,7 +34,7 @@ function Register() {
       toast.success("Account created!");
       navigate("/dashboard");
     } catch (err) {
-      toast.error(err?.message || err?.response?.data?.message || "Registration failed");
+      toast.error(err?.response?.data?.message || err?.message || "Registration failed");
     } finally {
       setLoading(false);
     }
